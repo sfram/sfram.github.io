@@ -1,0 +1,43 @@
+h1, p {
+font-family: "Courier New";
+}
+
+#p2 {
+position: absolute;
+top: 70px;
+}
+
+#p3 {
+position: relative;
+top: -50px;
+right: -200px;
+color: green;
+}
+
+#p4 {
+position: absolute;
+top: 125px;
+color: green;
+}
+
+#s1 {
+color: #FF00FF;
+background-color: yellow;
+}
+
+form {
+position: absolute;
+top: 60px;
+color: red;
+}
+
+span:not(#s1) {
+position: absolute;
+top: 115px;
+background-color: yellow;
+}
+
+input[type="button"] {
+color: purple;
+font-family: "Courier New";
+}

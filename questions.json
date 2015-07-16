@@ -1,0 +1,32 @@
+[
+    {
+        "question": [
+            "Yeah?"
+        ],
+        "choices": [
+            "Yes",
+            "No"
+        ],
+        "correctAnswer": "0"
+    },
+    {
+        "question": [
+            "Um?"
+        ],
+        "choices": [
+            "Y",
+            "N"
+        ],
+        "correctAnswer": "1"
+    },
+    {
+        "question": [
+            "Uhh?"
+        ],
+        "choices": [
+            "Yiss",
+            "No"
+        ],
+        "correctAnswer": "1"
+    }
+]
