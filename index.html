@@ -5,8 +5,8 @@
     <script language="JavaScript" type="text/JavaScript"></script>
     <link rel="stylesheet" type="text/css" href="sheet.css" />
   </head>
-  <body>	
-	
+  <body>  
+  
     <h1 id="h1"></h1>
     <p id="p2"></p>
     <p id="p3"></p>
@@ -21,18 +21,18 @@
     <input type="button" name="Last" value="Previous" onclick="lastQuestion()" />
     <input type="button" name="Account" value="Register/Login" onclick="registerUser()" /></span>
     <script>
-			
-			//Initialization of variables for questions, question text element reference,
-			//user choices, index currently being accessed for question/answer fetching and score.
-			var allQuestions;
+      
+      //Initialization of variables for questions, question text element reference,
+      //user choices, index currently being accessed for question/answer fetching and score.
+      var allQuestions;
       var p = document.getElementById("h1");
       var choices = new Array();
       var currentIndex = 0;
       var score = 0;
       
-			populate();
-			
-			//Verifies that the selected checkbox matches the correct answer in question array.
+      populate();
+      
+      //Verifies that the selected checkbox matches the correct answer in question array.
       function checkAnswer() {
       for (i = 0; i < form1.length; i++) {
         if (form1[i].checked == true) {
@@ -49,55 +49,55 @@
       return false;
       }
       
-			//If question has been answered, move up currentIndex and change text to proper question and answer choices.
-			//Adds to score if checkAnswer() returns true.
+      //If question has been answered, move up currentIndex and change text to proper question and answer choices.
+      //Adds to score if checkAnswer() returns true.
       function nextQuestion() {
         if (checkAnswer()) {
           alert("Correct!");
           score++;
         } 
-				else {
-				alert("Incorrect!");
-				}
-				
-				for (i = 0; i <= form1.length; i++) {
-					if (i == form1.length) {
-						alert("You must answer the question!");
-						return;
-					}				
-					if (form1[i].checked == true) {
-						choices[currentIndex] = i;
-						break;
-					}
-				}
-				
-				//If there are questions left, update text with new question. If not, display score.
-				if (allQuestions[currentIndex + 1]) {
-					currentIndex++;
-					properCheckbox();
-				
-					p.innerHTML = allQuestions[currentIndex].question;
-					document.getElementById("Label1").textContent = allQuestions[currentIndex].choices[0];
-					document.getElementById("Label2").textContent = allQuestions[currentIndex].choices[1];
-				} 
-				else {
-					document.write("Final score: " + score);
-				}
+        else {
+        alert("Incorrect!");
+        }
+        
+        for (i = 0; i <= form1.length; i++) {
+          if (i == form1.length) {
+            alert("You must answer the question!");
+            return;
+          }       
+          if (form1[i].checked == true) {
+            choices[currentIndex] = i;
+            break;
+          }
+        }
+        
+        //If there are questions left, update text with new question. If not, display score.
+        if (allQuestions[currentIndex + 1]) {
+          currentIndex++;
+          properCheckbox();
+        
+          p.innerHTML = allQuestions[currentIndex].question;
+          document.getElementById("Label1").textContent = allQuestions[currentIndex].choices[0];
+          document.getElementById("Label2").textContent = allQuestions[currentIndex].choices[1];
+        } 
+        else {
+          document.write("Final score: " + score);
+        }
       }
       
-			//Moves down currentIndex to show last question, subtracting from score if the previously submitted question was correct.
+      //Moves down currentIndex to show last question, subtracting from score if the previously submitted question was correct.
       function lastQuestion() {
       if (currentIndex != 0) {
-				currentIndex--;
-			}
-			
-			else {
-				alert("This is the first question!");
-				return;
-			}
+        currentIndex--;
+      }
+      
+      else {
+        alert("This is the first question!");
+        return;
+      }
       
       if (choices[currentIndex] == allQuestions[currentIndex].correctAnswer) {
-				score--;
+        score--;
       }
       
       p.innerHTML = allQuestions[currentIndex].question;
@@ -107,8 +107,8 @@
       properCheckbox();
       }
       
-			//Ensures that all proper checkboxes are marked.
-			//These can be empty checkboxes for a new question or previously marked ones when revisiting a past question.
+      //Ensures that all proper checkboxes are marked.
+      //These can be empty checkboxes for a new question or previously marked ones when revisiting a past question.
       function properCheckbox() {
       if (choices[currentIndex] != null) {
         if (choices[currentIndex] == 0) {
@@ -123,99 +123,99 @@
       }
       }
       
-			//Simple HTML5 localStorage function that demonstrates how to save an example username or password from a prompt.
+      //Simple HTML5 localStorage function that demonstrates how to save an example username or password from a prompt.
       function registerUser() {
-				if (localStorage && (!localStorage.getItem("username"))) {
-				
-					var uname = prompt("Enter username:");
-					var pword = prompt("Enter password:");
-				
-					localStorage.setItem("username", uname);
-					localStorage.setItem("password", pword);
-				}
-				
-				var p2 = document.getElementById("p2");
-				p2.innerHTML = "Hello, " + localStorage.getItem("username") + "!";
-				
-			}
-      
-			//Simple cookie function that takes a string representing a key and returns the cookie value.
-      function getCookie(cname) {
-				var name = cname + "=";
-				var ca = document.cookie.split(';');
-				for (var i = 0; i < ca.length; i++) {
-					var c = ca[i];
-					while (c.charAt(0) == ' ') c = c.substring(1);
-					if (c.indexOf(name) == 0) {
-						return c.substring(name.length, c.length);
-					} 
-				else {
-						return "";
-					}
-				}
-			}
-      
-			//Sets a cookie for the date when the site is accessed to display to the user next time they visit.
-      function cookieSetter() {
-				var expireDate = new Date();
-				var expireMonth = expireDate.getMonth();
-				expireDate.setMonth(expireMonth + 6);
-				var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-				
-				document.cookie = "VisitMonth=" + monthNames[expireMonth] + ";expires=" + expireDate.toGMTString() + ";";
-				var p3 = document.getElementById("p3");
-				var s1 = document.createElement("span");
-				s1.setAttribute("id", "s1");
-				p3.appendChild(document.createTextNode("You last visited this page in "));
-				p3.appendChild(s1);
-				s1.appendChild(document.createTextNode(getCookie("VisitMonth") + "."));
-			}
-      
-			//Fetches questions from external .json document, sending XMLHttp Request to server.
-			//Displays status message to user which depends on whether the request was successful.
-      function xmlRequester(url) {
-				var xmlHttp = new XMLHttpRequest();
-				if(xmlHttp){
-				xmlHttp.onreadystatechange = function(){
-						p4 = document.getElementById("p4");
-						if(xmlHttp.readyState == 1) {
-								p4.innerHTML = "Status 1: Server connection established! <br/>";
-						}
-						else if (xmlHttp.readyState == 2) {
-								p4.innerHTML = "Status 2: Request recieved! <br/>";
-						}
-						else if (xmlHttp.readyState == 3) {
-								p4.innerHTML = "Status 3: Processing Request!<br/>";
-						}
-						else if (xmlHttp.readyState == 4) {
-				
-								if(xmlHttp.status == 200) {
-										var text = xmlHttp.responseText;
-										p4.innerHTML = "Status 4: Request Complete!<br/>";
-										allQuestions = JSON.parse(text);
-						
-				
-						p.innerHTML = allQuestions[0].question[0];
-				
-						document.getElementById("Label1").textContent = allQuestions[0].choices[0];
-						document.getElementById("Label2").textContent = allQuestions[0].choices[1];
-								}
-								else {
-										alert("Something is wrong!");
-								}
-						}
-						};
-				xmlHttp.open("GET", url, true);
-				xmlHttp.send();
-				}
-			}
-      
-			//Function that calls XMLHttp and cookie functions to use for the HTML body onload property.
-      function populate() {
-				xmlRequester("questions.json");			
-				cookieSetter();
+        if (localStorage && (!localStorage.getItem("username"))) {
+        
+          var uname = prompt("Enter username:");
+          var pword = prompt("Enter password:");
+        
+          localStorage.setItem("username", uname);
+          localStorage.setItem("password", pword);
+        }
+        
+        var p2 = document.getElementById("p2");
+        p2.innerHTML = "Hello, " + localStorage.getItem("username") + "!";
+        
       }
-			
+      
+      //Simple cookie function that takes a string representing a key and returns the cookie value.
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1);
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          } 
+        else {
+            return "";
+          }
+        }
+      }
+      
+      //Sets a cookie for the date when the site is accessed to display to the user next time they visit.
+      function cookieSetter() {
+        var expireDate = new Date();
+        var expireMonth = expireDate.getMonth();
+        expireDate.setMonth(expireMonth + 6);
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        
+        document.cookie = "VisitMonth=" + monthNames[expireMonth] + ";expires=" + expireDate.toGMTString() + ";";
+        var p3 = document.getElementById("p3");
+        var s1 = document.createElement("span");
+        s1.setAttribute("id", "s1");
+        p3.appendChild(document.createTextNode("You last visited this page in "));
+        p3.appendChild(s1);
+        s1.appendChild(document.createTextNode(getCookie("VisitMonth") + "."));
+      }
+      
+      //Fetches questions from external .json document, sending XMLHttp Request to server.
+      //Displays status message to user which depends on whether the request was successful.
+      function xmlRequester(url) {
+        var xmlHttp = new XMLHttpRequest();
+        if(xmlHttp){
+        xmlHttp.onreadystatechange = function(){
+            p4 = document.getElementById("p4");
+            if(xmlHttp.readyState == 1) {
+                p4.innerHTML = "Status 1: Server connection established! <br/>";
+            }
+            else if (xmlHttp.readyState == 2) {
+                p4.innerHTML = "Status 2: Request recieved! <br/>";
+            }
+            else if (xmlHttp.readyState == 3) {
+                p4.innerHTML = "Status 3: Processing Request!<br/>";
+            }
+            else if (xmlHttp.readyState == 4) {
+        
+                if(xmlHttp.status == 200) {
+                    var text = xmlHttp.responseText;
+                    p4.innerHTML = "Status 4: Request Complete!<br/>";
+                    allQuestions = JSON.parse(text);
+            
+        
+            p.innerHTML = allQuestions[0].question[0];
+        
+            document.getElementById("Label1").textContent = allQuestions[0].choices[0];
+            document.getElementById("Label2").textContent = allQuestions[0].choices[1];
+                }
+                else {
+                    alert("Something is wrong!");
+                }
+            }
+            };
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send();
+        }
+      }
+      
+      //Function that calls XMLHttp and cookie functions to use for the HTML body onload property.
+      function populate() {
+        xmlRequester("questions.json");     
+        cookieSetter();
+      }
+      
     </script>
   </body>
 </html>
